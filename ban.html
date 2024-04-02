@@ -1,0 +1,15 @@
+<h1>Seras victima de poptart01.</h1>
+<p>Vas a morir ahorita mismo, es en serio.</p>
+<p>"tengo tu ip ahora mismo y se donde vives."</p>
+<h2 id="result"></h2>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(()=>{
+            // Use "https://ipinfo.io" link to use the
+            // ipinfo for getting the ip address
+            $.getJSON("https://ipinfo.io",
+            function (response) {
+                $('#result').html(`IP Address: ${response.ip}`)
+            }, "jsonp");
+        })  
+    </script>
