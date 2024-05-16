@@ -1,0 +1,35 @@
+-- Server Script
+
+local Players = game:GetService("Players")
+
+local function giveBall(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+    local ball = Instance.new("Part")
+    ball.Name = "Ball"
+    ball.Anchored = true
+    ball.CanCollide = false
+    ball.Transparency = 0.5
+    ball.BrickColor = BrickColor.new("Really red")
+    ball.CFrame = character.HumanoidRootPart.CFrame
+    ball.Parent = workspace
+
+    local weld = Instance.new("Weld")
+    weld.Parent = character
+    weld.Part0 = character.HumanoidRootPart
+    weld.Part1 = ball
+
+    local directions = {
+        W = ball.CFrame.lookVector,
+        S = -ball.CFrame.lookVector,
+        A = ball.CFrame.rightVector,
+        D = -ball.CFrame.rightVector,
+    }
+
+    player.InputBegan:Connect(function(input)
+        if directions[input.KeyCode.Name] then
+            ball.Velocity = directions[input.KeyCode.Name] * 10
+        end
+    end)
+end
+
+Players.PlayerAdded:Connect(giveBall)
